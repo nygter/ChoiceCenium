@@ -1,0 +1,21 @@
+{
+    "environmentSettings": {
+        "webSite": {
+            "name": "ChoiceCenium",
+            "location": "West Europe"
+        },
+        "databases": [
+            {
+                "connectionStringName": "DefaultConnection",
+                "databaseName": "ChoiceCenium_db",
+                "serverName": "",
+                "user": "choicecenium",
+                "password": "",
+                "edition": "",
+                "size": "",
+                "collation": "",
+                "location": "West Europe"
+            }
+        ]
+    }
+}

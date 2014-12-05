@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ChoiceCenium_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Hotelinfoes">
+          <Key>
+            <PropertyRef Name="HotelId" />
+          </Key>
+          <Property Name="HotelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelName" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Lon" Type="nvarchar(max)" />
+          <Property Name="Lat" Type="nvarchar(max)" />
+          <Property Name="CurrCeniumVersion" Type="int" Nullable="false" />
+          <Property Name="UpgradeDate" Type="datetime" />
+          <Property Name="CeniumUpgradeComplete" Type="bit" Nullable="false" />
+          <Property Name="NotUpgrading" Type="bit" Nullable="false" />
+          <Property Name="KjedeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KjedeInfoes">
+          <Key>
+            <PropertyRef Name="KjedeId" />
+          </Key>
+          <Property Name="KjedeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KjedeNavn" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ChoiceCenium_db.dbo.Logs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Logs">
+          <Key>
+            <PropertyRef Name="ExceptionMessage" />
+            <PropertyRef Name="Source" />
+            <PropertyRef Name="Complete" />
+            <PropertyRef Name="LogDate" />
+          </Key>
+          <Property Name="ExceptionMessage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Complete" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LogDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Hotelinfoes_dbo_KjedeInfoes_KjedeId">
+          <End Role="KjedeInfoes" Type="Self.KjedeInfoes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Hotelinfoes" Type="Self.Hotelinfoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KjedeInfoes">
+              <PropertyRef Name="KjedeId" />
+            </Principal>
+            <Dependent Role="Hotelinfoes">
+              <PropertyRef Name="KjedeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ChoiceCenium_dbModelStoreContainer">
+          <EntitySet Name="Hotelinfoes" EntityType="Self.Hotelinfoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KjedeInfoes" EntityType="Self.KjedeInfoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logs" EntityType="Self.Logs" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Logs].[ExceptionMessage] AS [ExceptionMessage], 
+    [Logs].[Source] AS [Source], 
+    [Logs].[Complete] AS [Complete], 
+    [Logs].[LogDate] AS [LogDate]
+    FROM [dbo].[Logs] AS [Logs]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_dbo_Hotelinfoes_dbo_KjedeInfoes_KjedeId" Association="Self.FK_dbo_Hotelinfoes_dbo_KjedeInfoes_KjedeId">
+            <End Role="KjedeInfoes" EntitySet="KjedeInfoes" />
+            <End Role="Hotelinfoes" EntitySet="Hotelinfoes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ChoiceCenium_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="KjedeInfoes">
+          <Key>
+            <PropertyRef Name="KjedeId" />
+          </Key>
+          <Property Name="KjedeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KjedeNavn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Hotelinfoes" Relationship="ChoiceCenium_dbModel.FK_dbo_Hotelinfoes_dbo_KjedeInfoes_KjedeId" FromRole="KjedeInfoes" ToRole="Hotelinfoes" />
+        </EntityType>
+        <EntityContainer Name="ChoiceCenium_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="KjedeInfoes" EntityType="Self.KjedeInfoes" />
+          <EntitySet Name="Logs" EntityType="ChoiceCenium_dbModel.Logs" />
+          <EntitySet Name="Hotelinfoes" EntityType="ChoiceCenium_dbModel.Hotelinfoes" />
+          <AssociationSet Name="FK_dbo_Hotelinfoes_dbo_KjedeInfoes_KjedeId" Association="ChoiceCenium_dbModel.FK_dbo_Hotelinfoes_dbo_KjedeInfoes_KjedeId">
+            <End Role="KjedeInfoes" EntitySet="KjedeInfoes" />
+            <End Role="Hotelinfoes" EntitySet="Hotelinfoes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Logs">
+          <Key>
+            <PropertyRef Name="ExceptionMessage" />
+            <PropertyRef Name="Source" />
+            <PropertyRef Name="Complete" />
+            <PropertyRef Name="LogDate" />
+          </Key>
+          <Property Name="ExceptionMessage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Source" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Complete" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LogDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Hotelinfoes">
+          <Key>
+            <PropertyRef Name="HotelId" />
+          </Key>
+          <Property Name="HotelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CurrCeniumVersion" Type="Int32" Nullable="false" />
+          <Property Name="UpgradeDate" Type="DateTime" Precision="3" Nullable="true" />
+          <Property Name="CeniumUpgradeComplete" Type="Boolean" Nullable="false" />
+          <Property Name="NotUpgrading" Type="Boolean" Nullable="false" />
+          <Property Name="KjedeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="KjedeInfoes" Relationship="ChoiceCenium_dbModel.FK_dbo_Hotelinfoes_dbo_KjedeInfoes_KjedeId" FromRole="Hotelinfoes" ToRole="KjedeInfoes" />
+        </EntityType>
+        <Association Name="FK_dbo_Hotelinfoes_dbo_KjedeInfoes_KjedeId">
+          <End Type="ChoiceCenium_dbModel.KjedeInfoes" Role="KjedeInfoes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ChoiceCenium_dbModel.Hotelinfoes" Role="Hotelinfoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KjedeInfoes">
+              <PropertyRef Name="KjedeId" />
+            </Principal>
+            <Dependent Role="Hotelinfoes">
+              <PropertyRef Name="KjedeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ChoiceCenium_dbModelStoreContainer" CdmEntityContainer="ChoiceCenium_dbEntities">
+          <EntitySetMapping Name="KjedeInfoes">
+            <EntityTypeMapping TypeName="ChoiceCenium_dbModel.KjedeInfoes">
+              <MappingFragment StoreEntitySet="KjedeInfoes">
+                <ScalarProperty Name="KjedeId" ColumnName="KjedeId" />
+                <ScalarProperty Name="KjedeNavn" ColumnName="KjedeNavn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="ChoiceCenium_dbModel.Logs">
+              <MappingFragment StoreEntitySet="Logs">
+                <ScalarProperty Name="LogDate" ColumnName="LogDate" />
+                <ScalarProperty Name="Complete" ColumnName="Complete" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="ExceptionMessage" ColumnName="ExceptionMessage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hotelinfoes">
+            <EntityTypeMapping TypeName="ChoiceCenium_dbModel.Hotelinfoes">
+              <MappingFragment StoreEntitySet="Hotelinfoes">
+                <ScalarProperty Name="KjedeId" ColumnName="KjedeId" />
+                <ScalarProperty Name="NotUpgrading" ColumnName="NotUpgrading" />
+                <ScalarProperty Name="CeniumUpgradeComplete" ColumnName="CeniumUpgradeComplete" />
+                <ScalarProperty Name="UpgradeDate" ColumnName="UpgradeDate" />
+                <ScalarProperty Name="CurrCeniumVersion" ColumnName="CurrCeniumVersion" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Lon" ColumnName="Lon" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="HotelName" ColumnName="HotelName" />
+                <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Choice.Cenium.WebAPI", "ChoiceCenium\Choice.Cenium.WebAPI.csproj", "{B2531A76-519E-4D37-8FE0-E6D9B780F3F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{BC93F76C-C3A3-4E6E-ADEB-92642F4239AE}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureWebsitePublishModule.psm1 = PublishScripts\AzureWebsitePublishModule.psm1
+		PublishScripts\Publish-WebApplicationWebsite.ps1 = PublishScripts\Publish-WebApplicationWebsite.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{25FBA573-6B56-4457-9A27-40238EFC0425}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\ChoiceCenium-WAWS-dev.json = PublishScripts\Configurations\ChoiceCenium-WAWS-dev.json
+		PublishScripts\Configurations\ChoiceCeniumWebFrontEnd-WAWS-dev.json = PublishScripts\Configurations\ChoiceCeniumWebFrontEnd-WAWS-dev.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{10D32343-9CA8-4DC6-ACFF-65DC8938A848}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Choice.Cenium.WebFrontEnd", "Choice.Cenium.WebFrontEnd\Choice.Cenium.WebFrontEnd.csproj", "{AC97C457-599C-43FF-92DF-CE33D226855E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Choice.Cenium.HotelImportJob", "HotelImport\Choice.Cenium.HotelImportJob.csproj", "{607FC8A6-03AB-44AF-936F-72AB645EF390}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2531A76-519E-4D37-8FE0-E6D9B780F3F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2531A76-519E-4D37-8FE0-E6D9B780F3F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2531A76-519E-4D37-8FE0-E6D9B780F3F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2531A76-519E-4D37-8FE0-E6D9B780F3F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC97C457-599C-43FF-92DF-CE33D226855E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC97C457-599C-43FF-92DF-CE33D226855E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC97C457-599C-43FF-92DF-CE33D226855E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC97C457-599C-43FF-92DF-CE33D226855E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{607FC8A6-03AB-44AF-936F-72AB645EF390}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{607FC8A6-03AB-44AF-936F-72AB645EF390}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{607FC8A6-03AB-44AF-936F-72AB645EF390}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{607FC8A6-03AB-44AF-936F-72AB645EF390}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{25FBA573-6B56-4457-9A27-40238EFC0425} = {BC93F76C-C3A3-4E6E-ADEB-92642F4239AE}
+	EndGlobalSection
+EndGlobal

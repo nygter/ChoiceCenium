@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="ChoiceCenium.Svc.LoginService" CodeBehind="LoginService.svc.cs" %>
