@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace ChoiceCenium.SignalR
@@ -38,4 +40,20 @@ namespace ChoiceCenium.SignalR
         [JsonProperty("kjedenavn")]
         public string KjedeNavn { get; set; }
     }
+
+    public class KjedeUpgradeStatusSignalR
+    {
+        [JsonProperty("kjedeid")]
+        public int KjedeId { get; set; }
+
+        [JsonProperty("kjedenavn")]
+        public string KjedeNavn { get; set; }
+
+        [JsonProperty("totalhotels")]
+        public int TotalHotels { get; set; }
+
+        [JsonProperty("upgradedhotels")]
+        public int UpgradedHotels { get; set; }
+    }
+
 }

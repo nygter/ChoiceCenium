@@ -16,7 +16,7 @@ namespace Choice.Cenium.HotelImportJob
             {
                 var retList = new List<T>();
 
-                TextReader tr = new StreamReader(stream);
+                TextReader tr = new StreamReader(stream, new UTF8Encoding(true), true);
 
                 // Leave the first line
                 tr.ReadLine();

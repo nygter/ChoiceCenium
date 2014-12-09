@@ -15,17 +15,35 @@ angular.module('choiceCeniumApp').controller('MainCtrl', function ($scope, $root
     // TODO : Endre ved å sette .hotels direkte i populateHotels
 	//$scope.hotels = getHotels();
 
-    // UGLE : TODO : TERJE (Dette skjer når signalR kallet gjøres.... !!!!!!!!!!!!!!!!!!!!!!!)
+	
 
 	$rootScope.populateHotels = function(hotelInfo) {
+	    $scope.KjedeUpdateStatus = hotelInfo.KjedeListUpgradeStatusSignalR;
+
+	    $scope.KjedeUpdateStatus.each(function (kus) {
+	        kus.statusArray = [];
+            for (i = 0; i < kus.totalhotels; i++) {
+                kus.statusArray[i] = i < kus.upgradedhotels;
+	        }
+	    });
 
 
-	    for (var i = 0; i < hotelInfo.length; i++) {
+	    for (var i = 0; i < hotelInfo.HotelListSignalR.length; i++) {
 	        $scope.hotelGeoJson.push({
 	            type: 'Feature',
-	            "geometry": { "type": "Point", "coordinates": [hotelInfo[i].lon, hotelInfo[i].lat] }
+	            "geometry": { "type": "Point", "coordinates": [hotelInfo.HotelListSignalR[i].lon, hotelInfo.HotelListSignalR[i].lat] },
+	            "hotelinfo": {
+	                "type": "Data",
+	                "hotelname": [hotelInfo.HotelListSignalR[i].hotelname],
+	                "ceniumversion": [hotelInfo.HotelListSignalR[i].currceniumversion],
+	                "upgradedate": [hotelInfo.HotelListSignalR[i].upgradedate],
+	                "notupgrading": [hotelInfo.HotelListSignalR[i].notupgrading],
+	                "upgradecomplete": [hotelInfo.HotelListSignalR[i].ceniumupgradecomplete]
+	            }
 	        });
 	    }
+
+        
 
 	    map.markerLayer.setGeoJSON($scope.hotelGeoJson);
 

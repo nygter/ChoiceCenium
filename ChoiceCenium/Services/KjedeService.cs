@@ -13,5 +13,13 @@ namespace ChoiceCenium.Services
             return db.KjedeInfoes.Single(k => k.KjedeId == kjedeId).KjedeNavn;
 
         }
+
+        public static IList<KjedeInfoes> GetKjeder()
+        {
+            var db = new ChoiceCenium_dbEntities();
+            return db.KjedeInfoes.ToList();
+
+        }
+
     }
 }

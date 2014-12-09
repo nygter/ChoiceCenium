@@ -55,8 +55,9 @@
             <div class="maincontent">
                 
             
-            <dx:ASPxGridView ID="HotelList" runat="server" AutoGenerateColumns="False" DataSourceID="CeniumDataSource" Theme="Office2010Black" KeyFieldName="HotelId" Width="100%">
-            <Columns>
+            <dx:ASPxGridView ID="HotelList" runat="server" AutoGenerateColumns="False" DataSourceID="CeniumDataSource" Theme="Office2010Black" KeyFieldName="HotelId" Width="100%" S>
+            <SettingsPager PageSize="30" />
+                <Columns>
                 <dx:GridViewCommandColumn ShowEditButton="true" VisibleIndex="0" ShowNewButtonInHeader="True" Caption="Opprett" />
                 <dx:GridViewDataTextColumn FieldName="HotelId" VisibleIndex="1" Visible="False" />
                 <dx:GridViewDataTextColumn FieldName="HotelName" VisibleIndex="2" SortIndex="0" SortOrder="Ascending"/>

@@ -81,8 +81,21 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="fonts\ds-point-webfont.svg" />
+    <Content Include="images\progress-new-active.png" />
+    <Content Include="images\progress-new-inactive.png" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config" />
+    <Content Include="fonts\23C764_1F_0.eot" />
+    <Content Include="fonts\23C764_1F_0.ttf" />
+    <Content Include="fonts\23C764_1F_0.woff" />
+    <Content Include="fonts\23C764_28_0.eot" />
+    <Content Include="fonts\23C764_28_0.ttf" />
+    <Content Include="fonts\23C764_28_0.woff" />
+    <Content Include="fonts\desktop.ini" />
+    <Content Include="fonts\ds-point-webfont.eot" />
+    <Content Include="fonts\ds-point-webfont.ttf" />
+    <Content Include="fonts\ds-point-webfont.woff" />
     <None Include="Properties\PublishProfiles\ChoiceCeniumWebFrontEnd.pubxml" />
     <Content Include="scripts\angular-animate.min.js.map" />
     <Content Include="scripts\angular-aria.min.js.map" />
@@ -96,6 +109,10 @@
     <Content Include="scripts\angular.min.js.map" />
     <Content Include="scripts\errors.json" />
     <Content Include="scripts\jquery-2.1.1.min.map" />
+    <Content Include="scripts\sugar-es6-patch.js" />
+    <Content Include="scripts\sugar-es6-patch.min.js" />
+    <Content Include="scripts\sugar.js" />
+    <Content Include="scripts\sugar.min.js" />
     <Content Include="scripts\version.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

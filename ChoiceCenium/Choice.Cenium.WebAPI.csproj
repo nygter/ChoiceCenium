@@ -969,6 +969,7 @@
     <Compile Include="Services\LoginService.cs" />
     <Compile Include="Hubs\HotelInfoHub.cs" />
     <Compile Include="Services\LogService.cs" />
+    <Compile Include="Services\StatisticService.cs" />
     <Compile Include="SignalR\HotelInfoSignalR.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="view.aspx.cs">

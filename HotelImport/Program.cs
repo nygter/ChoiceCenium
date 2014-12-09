@@ -23,6 +23,7 @@ namespace Choice.Cenium.HotelImportJob
             var sxNrOfHotels = 0;
             var sxNrOfLatLonMatches = 0;
             var sxNrOfLatLonSkips = 0;
+            var nomatch = new List<string>();
 
             try
             {
@@ -74,6 +75,7 @@ namespace Choice.Cenium.HotelImportJob
                     // UGLER ER FINE:
                     var lon = "";
                     var lat = "";
+                    
 
                     LonLat lonlat = TryMatchHotelNameVSJSONList(hd.HotelName);
                     lon = lonlat.Lon;
@@ -85,6 +87,7 @@ namespace Choice.Cenium.HotelImportJob
                     else
                     {
                         sxNrOfLatLonSkips++;
+                        nomatch.Add(lonlat.HotelNameSource);
                     }
 
                     var hotelInfo = new Hotelinfoes
@@ -99,7 +102,7 @@ namespace Choice.Cenium.HotelImportJob
                     };
                     db.Hotelinfoes.Add(hotelInfo);
                     sxNrOfHotels++;
-                    db.SaveChanges();
+                    //db.SaveChanges();
                 }
 
             }
@@ -109,6 +112,13 @@ namespace Choice.Cenium.HotelImportJob
                 Console.WriteLine("Antall hoteller importert: " + sxNrOfHotels);
                 Console.WriteLine("Antall LonLat matches: " + sxNrOfLatLonMatches);
                 Console.WriteLine("Antall LonLat skips: " + sxNrOfLatLonSkips);
+
+                foreach (string str in nomatch)
+                {
+                    Console.WriteLine(str);
+                }
+
+
                 Console.ReadLine();
             }
         }
@@ -117,13 +127,12 @@ namespace Choice.Cenium.HotelImportJob
         {
             foreach (var obj in JsonObj)
             {
-                
                 if (hotelName.ToLower() == obj.Name.ToLower())
-                    {
-                        return new LonLat{Lat = obj.Lat, Lon = obj.Lon};
-                    }
+                {
+                    return new LonLat{Lat = obj.Lat, Lon = obj.Lon};
+                }
             }
-            return new LonLat{Lat="",Lon=""};
+            return new LonLat { Lat = "", Lon = "", HotelNameSource = hotelName };    
         }
     }
 
@@ -147,6 +156,7 @@ namespace Choice.Cenium.HotelImportJob
     {
         public string Lon { get; set; }
         public string Lat { get; set; }
+        public string HotelNameSource { get; set; }
     }
 
 }
