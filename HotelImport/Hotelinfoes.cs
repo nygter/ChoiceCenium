@@ -24,6 +24,7 @@ namespace HotelImport
         public bool CeniumUpgradeComplete { get; set; }
         public bool NotUpgrading { get; set; }
         public int KjedeId { get; set; }
+        public string PropertyCode { get; set; }
     
         public virtual KjedeInfoes KjedeInfoes { get; set; }
     }

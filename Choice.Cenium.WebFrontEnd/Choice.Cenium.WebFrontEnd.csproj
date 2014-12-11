@@ -82,6 +82,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\ds-point-webfont.svg" />
+    <Content Include="images\dot-blue.png" />
+    <Content Include="images\dot-orange.png" />
+    <Content Include="images\dot-red.png" />
+    <Content Include="images\dot-yellow.png" />
     <Content Include="images\progress-new-active.png" />
     <Content Include="images\progress-new-inactive.png" />
     <Content Include="packages.config" />
@@ -109,6 +113,10 @@
     <Content Include="scripts\angular.min.js.map" />
     <Content Include="scripts\errors.json" />
     <Content Include="scripts\jquery-2.1.1.min.map" />
+    <Content Include="scripts\moment-with-locales.js" />
+    <Content Include="scripts\moment-with-locales.min.js" />
+    <Content Include="scripts\moment.js" />
+    <Content Include="scripts\moment.min.js" />
     <Content Include="scripts\sugar-es6-patch.js" />
     <Content Include="scripts\sugar-es6-patch.min.js" />
     <Content Include="scripts\sugar.js" />

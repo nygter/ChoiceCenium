@@ -19,6 +19,7 @@
           <Property Name="CeniumUpgradeComplete" Type="bit" Nullable="false" />
           <Property Name="NotUpgrading" Type="bit" Nullable="false" />
           <Property Name="KjedeId" Type="int" Nullable="false" />
+          <Property Name="PropertyCode" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="KjedeInfoes">
           <Key>
@@ -84,6 +85,7 @@
           <Property Name="NotUpgrading" Type="Boolean" Nullable="false" />
           <Property Name="KjedeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="KjedeInfoes" Relationship="ChoiceCenium_dbModel.FK_dbo_Hotelinfoes_dbo_KjedeInfoes_KjedeId" FromRole="Hotelinfoes" ToRole="KjedeInfoes" />
+          <Property Name="PropertyCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_dbo_Hotelinfoes_dbo_KjedeInfoes_KjedeId">
           <End Type="ChoiceCenium_dbModel.KjedeInfoes" Role="KjedeInfoes" Multiplicity="1">
@@ -116,6 +118,7 @@
           <EntitySetMapping Name="Hotelinfoes">
             <EntityTypeMapping TypeName="ChoiceCenium_dbModel.Hotelinfoes">
               <MappingFragment StoreEntitySet="Hotelinfoes">
+                <ScalarProperty Name="PropertyCode" ColumnName="PropertyCode" />
                 <ScalarProperty Name="KjedeId" ColumnName="KjedeId" />
                 <ScalarProperty Name="NotUpgrading" ColumnName="NotUpgrading" />
                 <ScalarProperty Name="CeniumUpgradeComplete" ColumnName="CeniumUpgradeComplete" />

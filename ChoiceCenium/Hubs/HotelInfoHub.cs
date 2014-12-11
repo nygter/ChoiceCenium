@@ -51,7 +51,7 @@ namespace ChoiceCenium.Hubs
                 Lat = hotelinfo.Lat,
                 Lon = hotelinfo.Lon,
                 NotUpgrading = hotelinfo.NotUpgrading,
-                UpgradeDate = null
+                UpgradeDate = hotelinfo.UpgradeDate ?? null
             }).ToList();
 
             hotelSignalR.HotelListSignalR = hotelListSignalR;

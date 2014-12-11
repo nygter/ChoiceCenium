@@ -94,7 +94,7 @@ namespace Choice.Cenium.HotelImportJob
                     {
                         HotelName = hd.HotelName,
                         Address = hd.Address,
-                        KjedeInfoes = db.KjedeInfoes.Single(k => k.KjedeNavn == hd.Kjede),
+                        KjedeInfoes = db.KjedeInfoes.Single(k => k.KjedeId == 61),
                         NotUpgrading = hd.NotUpgrading,
                         UpgradeDate = null,
                         Lon = lon,
@@ -102,7 +102,7 @@ namespace Choice.Cenium.HotelImportJob
                     };
                     db.Hotelinfoes.Add(hotelInfo);
                     sxNrOfHotels++;
-                    //db.SaveChanges();
+                    db.SaveChanges();
                 }
 
             }
