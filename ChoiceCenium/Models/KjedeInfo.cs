@@ -18,7 +18,7 @@ namespace ChoiceCenium.Models
             }
             catch (Exception e)
             {
-                LogService.Register(e.Message, e.Source, e.ToString());
+                //LogService.Register(e.Message, e.Source, e.ToString());
                 throw;
             }
         }

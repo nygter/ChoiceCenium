@@ -4,6 +4,8 @@ angular.module('choiceCeniumApp').controller('MainCtrl', function ($scope, $root
 	
 	signalRSvc.initialize();
 
+	
+
 	//var animationLength = 7000;
 
 	// Map init
@@ -43,10 +45,9 @@ angular.module('choiceCeniumApp').controller('MainCtrl', function ($scope, $root
 	        });
 	    }
 
-        
+	    
 
 	    map.markerLayer.setGeoJSON($scope.hotelGeoJson);
-
 
 	    $("img.dot").each(function (index) {
 	        var dotImageElement = $(this);
@@ -68,36 +69,70 @@ angular.module('choiceCeniumApp').controller('MainCtrl', function ($scope, $root
 
             if (upgradeDate.length > 5){
 
-                if (isToday(upgradeDate)) {
+                if (in3DaysRange(upgradeDate, 2)) {
                     dotImageElement.attr("src", "../images/dot-orange.png");
                     dotImageElement.addClass("dot-pulse");
 
+                    addHotelToNewsTicker(hotelToCheck);
+                    
+
                 }
-
-                //var upgradeMoment = moment(hotelToCheck.upgradedate);
-	            //if(upgradeMoment.isValid()) {
-
-	                
-
-	                //var isMatch = moment().isSame(hotelToCheck.upgradedate, 'day');
-
-	                //if (isMatch) {
-	                //    alert("Datematch!");
-	                //}
-
-	                //console.log(hotelToCheck.hotelname + " >> " + upgradeMoment);
-	            //}
             }
 	    });
+
+	    initiateNewsTicker();
+
 	};
 
-	function isToday(s) {
+	function initiateNewsTicker() {
+	    $('.marquee').marquee({
+	        //speed in milliseconds of the marquee
+	        duration: 35000,
+	        //gap in pixels between the tickers
+	        gap: 50,
+	        //time in milliseconds before the marquee will start animating
+	        delayBeforeStart: 1000,
+	        //'left' or 'right'
+	        direction: 'left',
+	        //true or false - should the marquee be duplicated to show an effect of continues flow
+	        duplicated: false
+	    });
+    }
+
+    function addHotelToNewsTicker(hotel) {
+        var newsTicker = $('.marquee');
+
+        //var dt = hotel.upgradedate.toString();
+
+        var fDate = moment(hotel.upgradedate.toString()).format('LL');
+
+        //var ugle = Date.Create(hotel.upgradedate).format('{dd}.{MM}.{yyyy}');
+        //console.log(ugle);
+
+        //var fDate = dt.substring(9, 2) + "." + dt.substring(6, 2) + dt.substring(0, 4); 
+
+        newsTicker.append("<img src='../images/upgrade-icon.png' class='upgrade-icon'/>" + "&nbsp;" + hotel.hotelname + "&nbsp;&nbsp;:&nbsp;&nbsp;" + fDate + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+    }
+
+    function isToday(s) {
 	    var m = moment(s);
 	    if (m.isValid()) {
 	        var isMatch = moment().isSame(m, 'day');
 	        console.log((isMatch ? 'Is' : 'Is not') + ' match!');
 	        return isMatch;
 	    }
+	}
+
+	function in3DaysRange(s, days) {
+	    var m = moment(s);
+
+	    if (m.isValid()) {
+
+	        var min = moment().subtract(days, 'days').startOf('day'),
+                max = moment().add(days-1, 'days').endOf('day');
+
+	        return m.isAfter(min) && m.isBefore(max);
+	        }
 	}
 
 	var timer;
@@ -133,6 +168,8 @@ angular.module('choiceCeniumApp').controller('MainCtrl', function ($scope, $root
 	    }));
 	});
 
+
+	
 
 // Animation
     //$scope.animate = function(booking) {

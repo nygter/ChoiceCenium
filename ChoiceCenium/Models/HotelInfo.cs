@@ -18,7 +18,7 @@ namespace ChoiceCenium.Models
             }
             catch (Exception e)
             {
-                LogService.Register(e.Message, e.Source, e.ToString());
+                //LogService.Register(e.Message, e.Source, e.ToString());
                 throw;
             }
         }
@@ -38,7 +38,7 @@ namespace ChoiceCenium.Models
             }
             catch (Exception e)
             {
-                LogService.Register(e.Message, e.Source, e.ToString());
+                //LogService.Register(e.Message, e.Source, e.ToString());
             }
             
             var hub = new HotelInfoHub();
@@ -61,12 +61,13 @@ namespace ChoiceCenium.Models
                 hotelinfo.CurrCeniumVersion = h.CurrCeniumVersion;
                 hotelinfo.NotUpgrading = h.NotUpgrading;
                 hotelinfo.UpgradeDate = h.UpgradeDate;
+                hotelinfo.PropertyCode = h.PropertyCode;
 
                 db.SaveChanges();
             }
             catch (Exception e)
             {
-                LogService.Register(e.Message, e.Source, e.ToString());
+                //LogService.Register(e.Message, e.Source, e.ToString());
             }
 
             var hub = new HotelInfoHub();
@@ -85,7 +86,7 @@ namespace ChoiceCenium.Models
             }
             catch (Exception e)
             {
-                LogService.Register(e.Message, e.Source, e.ToString());
+                //LogService.Register(e.Message, e.Source, e.ToString());
             }
             
             var hub = new HotelInfoHub();

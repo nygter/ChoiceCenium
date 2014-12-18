@@ -1,18 +1,37 @@
-<!--<div class="progressbar-positioner">
-    <div class="progress-info">
-        <div class="progress-info-left">
-            <strong>2014 REVENUE GOAL</strong>
+
+<div class="marquee"></div>
+
+<div class="dot-info">
+    <div class="dot-info-block">
+        <div class="icon-block">
+            <img src="../images/dot-info-blue.png" />
         </div>
-        <div class="progress-info-right">
-            <strong>1BN</strong> NOK
+        <div class="text-block">
+            Cenium 6 upgrade complete
+        </div>
+        <div class="clear" />
+        <div class="icon-block">
+            <img src="../images/dot-info-pulse.png" />
+        </div>
+        <div class="text-block">
+            Cenium 6 upgrade in progress
+        </div>
+        <div class="clear" />
+        <div class="icon-block">
+            <img src="../images/dot-info-yellow.png" />
+        </div>
+        <div class="text-block">
+            Still on Cenium 5
+        </div>
+        <div class="clear" />
+        <div class="icon-block">
+            <img src="../images/dot-info-red.png" />
+        </div>
+        <div class="text-block">
+            No Cenium
         </div>
     </div>
-    <div class="progressbar-wrapper">
-        <div class="progressbar-inner" ng-style="targetPercentageStyle">
-            <div class="progressbar-inner-label">%</div>
-        </div>
-    </div>
-</div>-->
+</div>
 
 
 <div class="info-box">
@@ -20,17 +39,17 @@
         <h2>
             <span>CENIUM 6 ROLLOUT</span>
         </h2>
-        
+
         <div class="text-block-container" ng-repeat="ki in KjedeUpdateStatus">
             <span class="maintext">{{ki.kjedenavn}}&nbsp;</span>
             <span class="subtext">{{ki.upgradedhotels}} of {{ki.totalhotels}}</span>
-            
+
 
             <div class="progress-line">
                 <div ng-repeat="t in ki.statusArray track by $index">
                     <div class="progress-item active" ng-show="t"></div>
                     <div class="progress-item inactive" ng-hide="t"></div>
-                    
+
 
                 </div>
             </div>
@@ -40,6 +59,10 @@
 </div>
 
 
+
+
 <div class="connection-spinner"><img src="/images/spinner.gif" alt=""><span>Reconnecting ..</span></div>
 
 <div id='map'></div>
+
+

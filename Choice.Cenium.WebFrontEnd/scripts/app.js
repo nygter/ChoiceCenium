@@ -22,7 +22,7 @@ app.factory('signalRSvc', function ($, $rootScope) {
     proxy: null,
     initialize: function () {
 
-        $.connection.hub.url = "http://localhost:50535/signalr/hubs";
+        $.connection.hub.url = "http://choicecenium.azurewebsites.net/signalr/hubs";
         //$.connection.hub.url = "http://https://choicelive-be.choice.no/signalr/hubs/signalr/hubs";
         var flight = $.connection.hotelInfoHub;
       $.connection.hub.logging = true;

@@ -19,7 +19,7 @@ namespace HotelImport
         public string Address { get; set; }
         public string Lon { get; set; }
         public string Lat { get; set; }
-        public int CurrCeniumVersion { get; set; }
+        public Nullable<int> CurrCeniumVersion { get; set; }
         public Nullable<System.DateTime> UpgradeDate { get; set; }
         public bool CeniumUpgradeComplete { get; set; }
         public bool NotUpgrading { get; set; }

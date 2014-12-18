@@ -59,20 +59,26 @@
             <SettingsPager PageSize="30" />
                 <Columns>
                 <dx:GridViewCommandColumn ShowEditButton="true" VisibleIndex="0" ShowNewButtonInHeader="True" Caption="Opprett" />
-                <dx:GridViewDataTextColumn FieldName="HotelId" VisibleIndex="1" Visible="False" />
-                <dx:GridViewDataTextColumn FieldName="HotelName" VisibleIndex="2" SortIndex="0" SortOrder="Ascending"/>
-                <dx:GridViewDataTextColumn FieldName="Address" VisibleIndex="3"/>
-                <dx:GridViewDataTextColumn FieldName="Lon" VisibleIndex="4" Visible="False" />
-                <dx:GridViewDataTextColumn FieldName="Lat" VisibleIndex="5" Visible="False" />
-                <dx:GridViewDataTextColumn FieldName="CurrCeniumVersion" VisibleIndex="6" SortIndex="1" SortOrder="Ascending"/>
-                <dx:GridViewDataDateColumn FieldName="UpgradeDate" VisibleIndex="7" SortIndex="2" SortOrder="Ascending"/>
-                <dx:GridViewDataCheckColumn FieldName="CeniumUpgradeComplete" VisibleIndex="8" SortIndex="3" SortOrder="Ascending"/>
-                <dx:GridViewDataCheckColumn FieldName="NotUpgrading" VisibleIndex="9" SortIndex="4" SortOrder="Ascending"/>
-                <dx:GridViewCommandColumn ShowDeleteButton="True" VisibleIndex="12" Caption=" " />
-                <dx:GridViewDataComboBoxColumn FieldName="KjedeId" VisibleIndex="11">
+                <dx:GridViewDataTextColumn FieldName="HotelId" VisibleIndex="1" Visible="False" Caption="Hotel ID" />
+                <dx:GridViewDataTextColumn FieldName="PropertyCode" VisibleIndex="2" Caption="Property Code" SortIndex="2" />
+                <dx:GridViewDataTextColumn FieldName="HotelName" VisibleIndex="3" SortIndex="0" SortOrder="Ascending" Caption="Hotel Name"/>
+                    <dx:GridViewDataTextColumn FieldName="Address" VisibleIndex="4" Caption="Address" SortIndex="1" />
+                
+                    <dx:GridViewDataComboBoxColumn FieldName="KjedeId" VisibleIndex="5" Caption="Kjede" Visible="False">
                     <PropertiesComboBox DataSourceID="KjedeInfoDataSource" TextField="KjedeNavn" ValueField="KjedeId">
                     </PropertiesComboBox>
                 </dx:GridViewDataComboBoxColumn>
+                <dx:GridViewDataTextColumn FieldName="Lon" VisibleIndex="6" Visible="False" />
+                <dx:GridViewDataTextColumn FieldName="Lat" VisibleIndex="7" Visible="False" />
+                <dx:GridViewDataTextColumn FieldName="CurrCeniumVersion" VisibleIndex="8" SortIndex="3" SortOrder="Ascending" Caption="Cenium Version" Visible="False"/>
+                <dx:GridViewDataDateColumn FieldName="UpgradeDate" VisibleIndex="9" SortIndex="4" SortOrder="Ascending" Caption="Upgrade Date">
+                    <PropertiesDateEdit DisplayFormatString="dd.MM.yyyy">
+                    </PropertiesDateEdit>
+                </dx:GridViewDataDateColumn>
+                    <dx:GridViewDataCheckColumn FieldName="CeniumUpgradeComplete" VisibleIndex="10" SortIndex="5" SortOrder="Ascending" Caption="Upgrade Complete" Visible="False"/>
+                <dx:GridViewDataCheckColumn FieldName="NotUpgrading" VisibleIndex="11" SortIndex="6" SortOrder="Ascending" Caption="Non Cenium" Visible="False" />
+                <dx:GridViewCommandColumn ShowDeleteButton="True" VisibleIndex="12" Visible="False" />
+                
             </Columns>
         </dx:ASPxGridView>
         <asp:ObjectDataSource ID="CeniumDataSource" runat="server" DataObjectTypeName="ChoiceCenium.Hotelinfoes" DeleteMethod="DeleteHotelInfo" SelectMethod="GetHotelInfo" TypeName="ChoiceCenium.Models.HotelInfo" UpdateMethod="UpdateHotelInfo" InsertMethod="InsertHotelInfo"></asp:ObjectDataSource>    

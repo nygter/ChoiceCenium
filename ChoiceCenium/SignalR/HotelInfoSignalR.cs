@@ -23,7 +23,7 @@ namespace ChoiceCenium.SignalR
         public string Lat { get; set; }
 
         [JsonProperty("currceniumversion")]
-        public int CurrCeniumVersion { get; set; }
+        public int? CurrCeniumVersion { get; set; }
 
         [JsonProperty("upgradedate")]
         public DateTime? UpgradeDate { get; set; }

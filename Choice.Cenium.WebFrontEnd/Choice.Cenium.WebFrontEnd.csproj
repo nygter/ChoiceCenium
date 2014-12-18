@@ -83,11 +83,16 @@
   <ItemGroup>
     <Content Include="fonts\ds-point-webfont.svg" />
     <Content Include="images\dot-blue.png" />
+    <Content Include="images\dot-info-blue.png" />
+    <Content Include="images\dot-info-pulse.png" />
+    <Content Include="images\dot-info-red.png" />
+    <Content Include="images\dot-info-yellow.png" />
     <Content Include="images\dot-orange.png" />
     <Content Include="images\dot-red.png" />
     <Content Include="images\dot-yellow.png" />
     <Content Include="images\progress-new-active.png" />
     <Content Include="images\progress-new-inactive.png" />
+    <Content Include="images\upgrade-icon.png" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config" />
     <Content Include="fonts\23C764_1F_0.eot" />
@@ -100,6 +105,7 @@
     <Content Include="fonts\ds-point-webfont.eot" />
     <Content Include="fonts\ds-point-webfont.ttf" />
     <Content Include="fonts\ds-point-webfont.woff" />
+    <None Include="Properties\PublishProfiles\choiceceniumweb.pubxml" />
     <None Include="Properties\PublishProfiles\ChoiceCeniumWebFrontEnd.pubxml" />
     <Content Include="scripts\angular-animate.min.js.map" />
     <Content Include="scripts\angular-aria.min.js.map" />
@@ -113,6 +119,7 @@
     <Content Include="scripts\angular.min.js.map" />
     <Content Include="scripts\errors.json" />
     <Content Include="scripts\jquery-2.1.1.min.map" />
+    <Content Include="scripts\jquery.marquee.min.js" />
     <Content Include="scripts\moment-with-locales.js" />
     <Content Include="scripts\moment-with-locales.min.js" />
     <Content Include="scripts\moment.js" />

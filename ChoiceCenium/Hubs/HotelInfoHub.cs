@@ -27,7 +27,7 @@ namespace ChoiceCenium.Hubs
             }
             catch (Exception e)
             {
-                LogService.Register(e.Message, e.Source, e.ToString());
+                //LogService.Register(e.Message, e.Source, e.ToString());
             }
         }
 

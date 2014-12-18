@@ -11,8 +11,13 @@ namespace ChoiceCenium
         {
             bool isAuth = Request.IsAuthenticated;
             HotelList.Columns[0].Visible = isAuth;
-            HotelList.Columns[4].Visible = isAuth;
             HotelList.Columns[5].Visible = isAuth;
+            HotelList.Columns[6].Visible = isAuth;
+            HotelList.Columns[7].Visible = isAuth;
+            HotelList.Columns[8].Visible = isAuth;
+            HotelList.Columns[10].Visible = isAuth; 
+            HotelList.Columns[11].Visible = isAuth;
+            HotelList.Columns[12].Visible = isAuth;
             lnkLogout.Visible = isAuth;
             lnkLogin.Visible = !isAuth;
         }

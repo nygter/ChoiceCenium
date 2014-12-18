@@ -115,17 +115,16 @@ img.dot {
 img.dot-pulse {
     height: 20px;
     width: 20px;
-    border: 3px solid #fff601;
   background: transparent;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
     -ms-border-radius: 50px;
     border-radius: 50px;
-  -webkit-animation: pulse 3s ease-in-out;
-  -moz-animation: pulse 3s ease-in-out;
-    -ms-animation: pulse 3s ease-in-out;
-    -o-animation: pulse 3s ease-in-out;
-    animation: pulse 3s ease-in-out;
+  -webkit-animation: pulse 1.8s;
+  -moz-animation: pulse 1.8s;
+    -ms-animation: pulse 1.8s;
+    -o-animation: pulse 1.8s;
+    animation: pulse 1.8s;
   -webkit-animation-iteration-count: infinite;
   -moz-animation-iteration-count: infinite;
     -ms-animation-iteration-count: infinite;
@@ -403,7 +402,7 @@ img.dot-pulse {
     display: block;
     clear: both;
     width: 100%;
-    line-height: 5em;
+    margin-bottom: 65px;
 }
 
 .text-block-container .maintext {
@@ -412,10 +411,10 @@ img.dot-pulse {
     color: #fff;
     float: left;
     font-weight: 600;
-    font-size: 2.2em;
+    font-size: 1.2em;
     opacity: .9;
-    margin-bottom: -15px;
     letter-spacing: 1px;
+    line-height: 2em;
 }
 
 .text-block-container .subtext {
@@ -424,11 +423,11 @@ img.dot-pulse {
         color: #757575;
         float: left;
         font-weight: 600;
-        font-size: 1.2em;
+        font-size: 1em;
         opacity: .9;
         margin-bottom: -15px;
         letter-spacing: 1px;
-    margin-top: 9px;
+    line-height: 2.6em;
 }
 
 
@@ -517,29 +516,92 @@ img.dot-pulse {
             }
 
 .progress-line {
-    width: 100%;
+    max-width: 80%;
     display: block;
     clear: both;
 }
 
 .progress-item {
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
     float: left;
 }
 
 .progress-item.inactive {
     background: url(../images/progress-new-inactive.png) no-repeat;
-    min-height: 18px;
-    min-width: 18px;
-    height: 18px;
-    width: 18px;
+    min-height: 15px;
+    min-width: 15px;
+    height: 15px;
+    width: 15px;
 }
 
 .progress-item.active {
     background: url(../images/progress-new-active.png) no-repeat;
-    min-height: 18px;
-    min-width: 18px;
-    height: 18px;
-    width: 18px;
+    min-height: 15px;
+    min-width: 15px;
+    height: 15px;
+    width: 15px;
+}
+
+.dot-info {
+    position: absolute;
+    z-index: 100;
+    bottom: 80px;
+    right: 80px;
+    padding: 2em 0 0 3.5em;
+    color: #fff;
+    min-width: 300px;
+}
+
+.dot-info .dot-info-block {
+    display: inline-block;
+    line-height: 4em;
+    width: 100%;
+}
+
+.dot-info .dot-info-block .icon-block {
+    float: left;
+    height: 40px;
+    width: 40px;
+    line-height: 5em;
+}
+
+.icon-block img {
+}
+
+    .dot-info .dot-info-block .text-block {
+        float: left;
+        height: 40px;
+        width: auto;
+        font-family: ProximaNova-Regular;
+        font-size: 1.4em;
+        margin-top: 4px;
+    }
+
+    .clear {
+        clear: both;
+        height: 1px;
+    }
+   
+
+ .marquee {
+     height: 50px;
+     background-color: rgb(0, 0, 0);
+    /* RGBa with 0.6 opacity */
+    background-color: rgba(0, 0, 0, 0.5);
+     line-height: 2em;
+     position: absolute;
+    z-index: 101;
+    bottom: 0;
+    right: 0;
+    color: #fff;
+    width: 100%;
+    font-family: ProximaNova-Regular;
+    font-size: 1.4em;
+     overflow: hidden;
+     border-top: 1px solid #d96531;
+}
+
+.upgrade-icon {
+    padding-top: 10px;
 }

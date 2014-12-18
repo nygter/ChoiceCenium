@@ -14,12 +14,12 @@
           <Property Name="Address" Type="nvarchar(max)" />
           <Property Name="Lon" Type="nvarchar(max)" />
           <Property Name="Lat" Type="nvarchar(max)" />
-          <Property Name="CurrCeniumVersion" Type="int" Nullable="false" />
+          <Property Name="CurrCeniumVersion" Type="int" />
           <Property Name="UpgradeDate" Type="datetime" />
           <Property Name="CeniumUpgradeComplete" Type="bit" Nullable="false" />
           <Property Name="NotUpgrading" Type="bit" Nullable="false" />
           <Property Name="KjedeId" Type="int" Nullable="false" />
-          <Property Name="PropertyCode" Type="varchar" MaxLength="20" />
+          <Property Name="PropertyCode" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="KjedeInfoes">
           <Key>
@@ -27,20 +27,6 @@
           </Key>
           <Property Name="KjedeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="KjedeNavn" Type="nvarchar(max)" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ChoiceCenium_db.dbo.Logs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Logs">
-          <Key>
-            <PropertyRef Name="ExceptionMessage" />
-            <PropertyRef Name="Source" />
-            <PropertyRef Name="Complete" />
-            <PropertyRef Name="LogDate" />
-          </Key>
-          <Property Name="ExceptionMessage" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Source" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Complete" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="LogDate" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_Hotelinfoes_dbo_KjedeInfoes_KjedeId">
           <End Role="KjedeInfoes" Type="Self.KjedeInfoes" Multiplicity="1">
@@ -59,14 +45,6 @@ warning 6002: The table/view 'ChoiceCenium_db.dbo.Logs' does not have a primary 
         <EntityContainer Name="ChoiceCenium_dbModelStoreContainer">
           <EntitySet Name="Hotelinfoes" EntityType="Self.Hotelinfoes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KjedeInfoes" EntityType="Self.KjedeInfoes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Logs" EntityType="Self.Logs" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Logs].[ExceptionMessage] AS [ExceptionMessage], 
-    [Logs].[Source] AS [Source], 
-    [Logs].[Complete] AS [Complete], 
-    [Logs].[LogDate] AS [LogDate]
-    FROM [dbo].[Logs] AS [Logs]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_dbo_Hotelinfoes_dbo_KjedeInfoes_KjedeId" Association="Self.FK_dbo_Hotelinfoes_dbo_KjedeInfoes_KjedeId">
             <End Role="KjedeInfoes" EntitySet="KjedeInfoes" />
             <End Role="Hotelinfoes" EntitySet="Hotelinfoes" />
@@ -86,25 +64,12 @@ warning 6002: The table/view 'ChoiceCenium_db.dbo.Logs' does not have a primary 
         </EntityType>
         <EntityContainer Name="ChoiceCenium_dbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="KjedeInfoes" EntityType="Self.KjedeInfoes" />
-          <EntitySet Name="Logs" EntityType="ChoiceCenium_dbModel.Logs" />
           <EntitySet Name="Hotelinfoes" EntityType="ChoiceCenium_dbModel.Hotelinfoes" />
           <AssociationSet Name="FK_dbo_Hotelinfoes_dbo_KjedeInfoes_KjedeId" Association="ChoiceCenium_dbModel.FK_dbo_Hotelinfoes_dbo_KjedeInfoes_KjedeId">
             <End Role="KjedeInfoes" EntitySet="KjedeInfoes" />
             <End Role="Hotelinfoes" EntitySet="Hotelinfoes" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Logs">
-          <Key>
-            <PropertyRef Name="ExceptionMessage" />
-            <PropertyRef Name="Source" />
-            <PropertyRef Name="Complete" />
-            <PropertyRef Name="LogDate" />
-          </Key>
-          <Property Name="ExceptionMessage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Source" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Complete" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="LogDate" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         <EntityType Name="Hotelinfoes">
           <Key>
             <PropertyRef Name="HotelId" />
@@ -114,13 +79,13 @@ warning 6002: The table/view 'ChoiceCenium_db.dbo.Logs' does not have a primary 
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Lon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Lat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CurrCeniumVersion" Type="Int32" Nullable="false" />
-          <Property Name="UpgradeDate" Type="DateTime" Precision="3" Nullable="true" />
+          <Property Name="CurrCeniumVersion" Type="Int32" />
+          <Property Name="UpgradeDate" Type="DateTime" Precision="3" />
           <Property Name="CeniumUpgradeComplete" Type="Boolean" Nullable="false" />
           <Property Name="NotUpgrading" Type="Boolean" Nullable="false" />
           <Property Name="KjedeId" Type="Int32" Nullable="false" />
+          <Property Name="PropertyCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="KjedeInfoes" Relationship="ChoiceCenium_dbModel.FK_dbo_Hotelinfoes_dbo_KjedeInfoes_KjedeId" FromRole="Hotelinfoes" ToRole="KjedeInfoes" />
-          <Property Name="PropertyCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_dbo_Hotelinfoes_dbo_KjedeInfoes_KjedeId">
           <End Type="ChoiceCenium_dbModel.KjedeInfoes" Role="KjedeInfoes" Multiplicity="1">
@@ -147,16 +112,6 @@ warning 6002: The table/view 'ChoiceCenium_db.dbo.Logs' does not have a primary 
               <MappingFragment StoreEntitySet="KjedeInfoes">
                 <ScalarProperty Name="KjedeId" ColumnName="KjedeId" />
                 <ScalarProperty Name="KjedeNavn" ColumnName="KjedeNavn" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Logs">
-            <EntityTypeMapping TypeName="ChoiceCenium_dbModel.Logs">
-              <MappingFragment StoreEntitySet="Logs">
-                <ScalarProperty Name="LogDate" ColumnName="LogDate" />
-                <ScalarProperty Name="Complete" ColumnName="Complete" />
-                <ScalarProperty Name="Source" ColumnName="Source" />
-                <ScalarProperty Name="ExceptionMessage" ColumnName="ExceptionMessage" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

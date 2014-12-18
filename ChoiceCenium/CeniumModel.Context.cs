@@ -26,7 +26,6 @@ namespace ChoiceCenium
         }
     
         public virtual DbSet<KjedeInfoes> KjedeInfoes { get; set; }
-        public virtual DbSet<Logs> Logs { get; set; }
         public virtual DbSet<Hotelinfoes> Hotelinfoes { get; set; }
     }
 }
