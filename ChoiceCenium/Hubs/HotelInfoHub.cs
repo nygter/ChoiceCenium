@@ -16,13 +16,7 @@ namespace ChoiceCenium.Hubs
         {
             try
             {
-                
-                //var jsonSerialiser = new JavaScriptSerializer();
-                //var json = jsonSerialiser.Serialize(hotelInfo);
-
                 var context = GlobalHost.ConnectionManager.GetHubContext<HotelInfoHub>();
-                //context.Clients.Client(dic[name]).broadcastMessage(message);
-                //hotelBooking = ChoiceHotelBooking.HotelBooking(hotelBooking);
                 context.Clients.All.addNewMessageToPage(signalRObject);
             }
             catch (Exception e)
@@ -31,7 +25,35 @@ namespace ChoiceCenium.Hubs
             }
         }
 
+        public void SendSingle(HotelSignalR signalRObject)
+        {
+            try
+            {
+                var context = GlobalHost.ConnectionManager.GetHubContext<HotelInfoHub>();
+                context.Clients.All.addNewMessageToPage(signalRObject);
+                //this.Clients.Caller.sendUpdateToClient(signalRObject);
+            }
+            catch (Exception e)
+            {
+                //LogService.Register(e.Message, e.Source, e.ToString());
+            }
+        }
+
+
         public void SendUpdateToClients()
+        {
+            var hotelSignalR = BuildHotelInfo();
+            Send(hotelSignalR);
+        }
+
+        public void InitializeClient()
+        {
+            var hotelSignalR = BuildHotelInfo();
+            SendSingle(hotelSignalR);
+
+        }
+
+        private static HotelSignalR BuildHotelInfo()
         {
             var db = new ChoiceCenium_dbEntities();
 
@@ -57,10 +79,10 @@ namespace ChoiceCenium.Hubs
             hotelSignalR.HotelListSignalR = hotelListSignalR;
             hotelSignalR.KjedeListUpgradeStatusSignalR = StatisticService.PopulateKjedeUpgradeStatusList(hotelListSignalR);
             hotelSignalR.UpgradeStatusPercentage = StatisticService.GetUpgradeStatusPercentage(hotelListSignalR);
-
-            Send(hotelSignalR);
-
+            return hotelSignalR;
         }
+
+        
     }
 
     public class HotelSignalR

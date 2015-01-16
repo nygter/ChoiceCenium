@@ -84,7 +84,9 @@
     <Content Include="fonts\ds-point-webfont.svg" />
     <Content Include="images\dot-blue.png" />
     <Content Include="images\dot-info-blue.png" />
-    <Content Include="images\dot-info-pulse.png" />
+    <Content Include="images\dot-info-pulse.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="images\dot-info-red.png" />
     <Content Include="images\dot-info-yellow.png" />
     <Content Include="images\dot-orange.png" />
@@ -105,6 +107,7 @@
     <Content Include="fonts\ds-point-webfont.eot" />
     <Content Include="fonts\ds-point-webfont.ttf" />
     <Content Include="fonts\ds-point-webfont.woff" />
+    <None Include="Properties\PublishProfiles\choiceceniumweb %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\choiceceniumweb.pubxml" />
     <None Include="Properties\PublishProfiles\ChoiceCeniumWebFrontEnd.pubxml" />
     <Content Include="scripts\angular-animate.min.js.map" />
@@ -117,6 +120,7 @@
     <Content Include="scripts\angular-sanitize.min.js.map" />
     <Content Include="scripts\angular-touch.min.js.map" />
     <Content Include="scripts\angular.min.js.map" />
+    <Content Include="scripts\cenium_web_job.js" />
     <Content Include="scripts\errors.json" />
     <Content Include="scripts\jquery-2.1.1.min.map" />
     <Content Include="scripts\jquery.marquee.min.js" />

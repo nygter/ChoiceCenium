@@ -1,10 +1,20 @@
 'use strict';
 
-angular.module('choiceCeniumApp').controller('MainCtrl', function ($scope, $rootScope, signalRSvc, $timeout) {
-	
-	signalRSvc.initialize();
+//$(document).ready ( function() {
+//    initiateMapAndData();
+//});
 
+//function initiateMapAndData() {
+    //$http.get('http://choicecenium.azurewebsites.net/api/WebJob');
+//}
+
+angular.module('choiceCeniumApp').controller('MainCtrl', function ($scope, $rootScope, signalRSvc, $timeout, $http) {
 	
+
+
+    signalRSvc.initialize();
+
+    
 
 	//var animationLength = 7000;
 
@@ -14,12 +24,47 @@ angular.module('choiceCeniumApp').controller('MainCtrl', function ($scope, $root
 
 	// Data
 	$scope.hotelGeoJson = [];
+
     // TODO : Endre ved å sette .hotels direkte i populateHotels
 	//$scope.hotels = getHotels();
+    function in3DaysRange(s, days) {
+        var m = moment(s);
 
-	
+        if (m.isValid()) {
 
-	$rootScope.populateHotels = function(hotelInfo) {
+            var min = moment().subtract(days, 'days').startOf('day'),
+                max = moment().add(days-1, 'days').endOf('day');
+
+            return m.isAfter(min) && m.isBefore(max);
+        }
+    }
+
+    function addHotelToNewsTicker(hotel) {
+        var newsTicker = $('.marquee');
+
+        //var dt = hotel.upgradedate.toString();
+
+        var fDate = moment(hotel.upgradedate.toString()).format('LL');
+
+        //var ugle = Date.Create(hotel.upgradedate).format('{dd}.{MM}.{yyyy}');
+        //console.log(ugle);
+
+        //var fDate = dt.substring(9, 2) + "." + dt.substring(6, 2) + dt.substring(0, 4); 
+
+        newsTicker.append("<img src='../images/upgrade-icon.png' class='upgrade-icon'/>" + "&nbsp;" + hotel.hotelname + "&nbsp;&nbsp;:&nbsp;&nbsp;" + fDate + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+    }
+
+    function getTransform(el) {
+        var results = $(el).css('-webkit-transform').match(/matrix(?:(3d)\(\d+(?:, \d+)*(?:, (\d+))(?:, (\d+))(?:, (\d+)), \d+\)|\(\d+(?:, \d+)*(?:, (\d+))(?:, (\d+))\))/);
+
+        if (!results) return [0, 0, 0];
+        if (results[1] == '3d') return results.slice(2, 5);
+
+        results.push(0);
+        return results.slice(5, 8);
+    }
+
+    $rootScope.populateHotels = function(hotelInfo) {
 	    $scope.KjedeUpdateStatus = hotelInfo.KjedeListUpgradeStatusSignalR;
 
 	    $scope.KjedeUpdateStatus.each(function (kus) {
@@ -29,6 +74,8 @@ angular.module('choiceCeniumApp').controller('MainCtrl', function ($scope, $root
 	        }
 	    });
 
+        //reset the array so items don't stack after each call...
+        $scope.hotelGeoJson = [];
 
 	    for (var i = 0; i < hotelInfo.HotelListSignalR.length; i++) {
 	        $scope.hotelGeoJson.push({
@@ -53,15 +100,23 @@ angular.module('choiceCeniumApp').controller('MainCtrl', function ($scope, $root
 	        var dotImageElement = $(this);
 	        var hotelToCheck = $scope.hotelGeoJson[index].hotelinfo;
 
-	        if (hotelToCheck.ceniumversion > 5) {
+            // DESC > LAVERE ENN VERSJON 6
+	        if (hotelToCheck.ceniumversion <= 5) {
 	            dotImageElement.attr("src", "../images/dot-yellow.png");
 	        }
 
-	        if (hotelToCheck.notupgrading == 'true') {
+	        // DESC > ER VERSJON 6
+	        if (hotelToCheck.ceniumversion === 6) {
+	            dotImageElement.attr("src", "../images/dot-orange.png");
+	        }
+
+	        // DESC > SKAL IKKE OPPGRADERES
+	        if (hotelToCheck.notupgrading[0]) {
 	            dotImageElement.attr("src", "../images/dot-red.png");
 	        }
 
-	        if (hotelToCheck.upgradecomplete == 'true') {
+	        // DESC > FERDIG OPPGRADERT
+	        if (hotelToCheck.upgradecomplete[0]) {
 	            dotImageElement.attr("src", "../images/dot-blue.png");
 	        }
 
@@ -74,17 +129,28 @@ angular.module('choiceCeniumApp').controller('MainCtrl', function ($scope, $root
                     dotImageElement.addClass("dot-pulse");
 
                     addHotelToNewsTicker(hotelToCheck);
-                    
-
+                } else {
+                        dotImageElement.removeClass("dot-pulse");
                 }
             }
 	    });
+
+        // clear div's...
+	    $('.super-pulse').remove();
+
+        $("img.dot-pulse").each(function() {
+            var translate = getTransform($(this));
+
+            $('.leaflet-marker-pane').append("<div class='super-pulse' style='transform: translate3d(" + translate[0] + "px, " + translate[1] + "px, "+ translate[2] + "px); z-index: 0;' />");
+
+            //console.log(translate);
+        });
 
 	    initiateNewsTicker();
 
 	};
 
-	function initiateNewsTicker() {
+    function initiateNewsTicker() {
 	    $('.marquee').marquee({
 	        //speed in milliseconds of the marquee
 	        duration: 35000,
@@ -99,21 +165,6 @@ angular.module('choiceCeniumApp').controller('MainCtrl', function ($scope, $root
 	    });
     }
 
-    function addHotelToNewsTicker(hotel) {
-        var newsTicker = $('.marquee');
-
-        //var dt = hotel.upgradedate.toString();
-
-        var fDate = moment(hotel.upgradedate.toString()).format('LL');
-
-        //var ugle = Date.Create(hotel.upgradedate).format('{dd}.{MM}.{yyyy}');
-        //console.log(ugle);
-
-        //var fDate = dt.substring(9, 2) + "." + dt.substring(6, 2) + dt.substring(0, 4); 
-
-        newsTicker.append("<img src='../images/upgrade-icon.png' class='upgrade-icon'/>" + "&nbsp;" + hotel.hotelname + "&nbsp;&nbsp;:&nbsp;&nbsp;" + fDate + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-    }
-
     function isToday(s) {
 	    var m = moment(s);
 	    if (m.isValid()) {
@@ -123,19 +174,7 @@ angular.module('choiceCeniumApp').controller('MainCtrl', function ($scope, $root
 	    }
 	}
 
-	function in3DaysRange(s, days) {
-	    var m = moment(s);
-
-	    if (m.isValid()) {
-
-	        var min = moment().subtract(days, 'days').startOf('day'),
-                max = moment().add(days-1, 'days').endOf('day');
-
-	        return m.isAfter(min) && m.isBefore(max);
-	        }
-	}
-
-	var timer;
+    var timer;
     var fadeInBuffer = false;
     $(document).mousemove(function () {
         if (!fadeInBuffer) {
@@ -167,158 +206,5 @@ angular.module('choiceCeniumApp').controller('MainCtrl', function ($scope, $root
 	        "className": "dot"
 	    }));
 	});
-
-
 	
-
-// Animation
-    //$scope.animate = function(booking) {
-
-    //	if (booking) {
-
-    //		var latlng = L.latLng(booking.to.lat, booking.to.lon);
-    //		var latlngFrom = L.latLng(booking.from.lat, booking.from.lon);
-
-    //		var notTheSameCoordinates = booking.to.lat != booking.from.lat && booking.to.lon != booking.from.lon;
-
-    //		var bedString = "";
-    //		for (var i = 0; i < booking.beds; i++) {
-    //			bedString += "<img src='images/bed.png' class='bed'>";
-    //		}
-
-    //		var popup = L.popup({
-    //			keepInView: false,
-    //			autoPan: false,
-    //			closeButton: false,
-    //			zoomAnimation: false
-    //		})
-    //		.setLatLng(latlng);
-
-    //		var brand = "";
-    //		if (booking.title.toLowerCase().indexOf("clarion") >= 0) {
-    //			brand = "clarion";
-    //			popup.setContent(populatePopupContent(true, brand, booking.title, booking.description));
-    //		} else if (booking.title.toLowerCase().indexOf("comfort") >= 0) {
-    //			brand = "comfort";
-    //			popup.setContent(populatePopupContent(true, brand, booking.title, booking.description));
-    //		} else if (booking.title.toLowerCase().indexOf("quality") >= 0) {
-    //			brand = "quality";
-    //			popup.setContent(populatePopupContent(true, brand, booking.title, booking.description));
-    //		} else {
-    //			brand = "none";
-    //			popup.setContent(populatePopupContent(false, brand, booking.title, booking.description));
-    //		}
-
-    //		var markerFrom = L.marker(latlngFrom, {
-    //			icon: L.icon({
-    //				iconUrl: 'images/dot-pulse.png',
-    //				iconSize: [15, 15],
-    //				"iconAnchor": [7, 7],
-    //				className: "dot-pulse"
-    //			})
-    //		}).addTo(map);
-
-    //		var markerTo = L.mapbox.featureLayer({
-    //		    type: 'Feature',
-    //		    zIndexOffset: 1000,
-    //		    geometry: {
-    //		        type: 'Point',
-    //		        coordinates: [booking.to.lon, booking.to.lat]
-    //		    },
-    //		    properties: {
-    //		        title: booking.title,
-    //		        description: booking.description,
-    //		        'marker-size': 'large',
-    //		        'marker-color': '#444'
-    //		    }
-    //		});
-
-    //		markerTo.bindPopup(popup);
-
-    //		if (notTheSameCoordinates) {
-    //			var t = setTimeout(function() {
-    //				markerTo.addTo(map);
-    //				markerTo.addLayer(popup);
-    //			}, animationLength + 100);
-    //		} else {
-    //			var t = setTimeout(function() {
-    //				markerTo.addTo(map);
-    //				markerTo.addLayer(popup);
-    //			}, 3000);
-    //		}
-
-    //		if (notTheSameCoordinates) {
-    //			var start = { x: booking.from.lon, y: booking.from.lat };
-    //			var end = { x: booking.to.lon, y: booking.to.lat };
-    //			var generator = new arc.GreatCircle(start, end, { });
-    //			var line = generator.Arc(100, { offset: 10 });
-
-    //			L.geoJson(line.json()).addTo(map);
-
-    //			var lineElement = $(".leaflet-zoom-animated g:last-child() path");
-    //			var pathLength = document.querySelector(".leaflet-zoom-animated g:last-child path").getTotalLength();
-    //			var lineColor = "#fa654b";
-
-    //			lineElement.css({
-    //				"stroke-dasharray" : pathLength,
-    //				"stroke-dashoffset" : pathLength,
-    //				"stroke": lineColor
-    //			});
-    //		}
-
-    //		var pulsedot = $(".dot-pulse").last();
-
-    //		var t = setTimeout(function() {
-    //			pulsedot.animate({ "opacity": 0 }, 1000, function() {
-    //				map.removeLayer(markerFrom);
-    //			});
-
-    //			if (notTheSameCoordinates) {
-    //				lineElement.animate({ "opacity": 0 }, 1000, function() {
-    //					lineElement.remove();
-    //				});
-    //			}
-    //		}, animationLength + 2000);
-
-    //		if (notTheSameCoordinates) {
-    //			var t = setTimeout(function() {
-    //				pulsedot.animate({ "opacity": 0 }, 1000, function() {
-    //					map.removeLayer(markerFrom);
-    //				});
-
-    //				if (notTheSameCoordinates) {
-    //					lineElement.animate({ "opacity": 0 }, 1000, function() {
-    //						lineElement.remove();
-    //					});
-    //				}
-    //			}, animationLength + 2000);
-
-    //			var to = setTimeout(function() {
-    //				map.removeLayer(markerTo);
-    //			}, animationLength + 4000);
-    //		} else {
-    //			var t = setTimeout(function() {
-    //				pulsedot.animate({ "opacity": 0 }, 1000, function() {
-    //					map.removeLayer(markerFrom);
-    //				});
-    //				map.removeLayer(markerTo);
-    //			}, animationLength);
-    //		}
-
-    //	}
-
-    //}
-
 });
-
-//function populatePopupContent(hasImage, brand, title, description) {
-//	if (hasImage) {
-//		return "<div class='brand " + brand + "'></div>" + 
-//		"<h2>" + title + " </h2>" + 
-//		"<p> " + description + "</p>";
-//	} else {
-//		return "<h2>" + title + " </h2>" + 
-//		"<p> " + description + "</p>";
-//	}
-//}
-

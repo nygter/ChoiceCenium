@@ -17,12 +17,13 @@ app.config(function ($routeProvider) {
 
 });
 
-app.factory('signalRSvc', function ($, $rootScope) {
+app.factory('signalRSvc', function ($, $rootScope, $http) {
   return {
     proxy: null,
     initialize: function () {
 
         $.connection.hub.url = "http://choicecenium.azurewebsites.net/signalr/hubs";
+
         //$.connection.hub.url = "http://https://choicelive-be.choice.no/signalr/hubs/signalr/hubs";
         var flight = $.connection.hotelInfoHub;
       $.connection.hub.logging = true;
@@ -31,14 +32,27 @@ app.factory('signalRSvc', function ($, $rootScope) {
         // console.log(booking);
           $rootScope.$apply(function () {
               console.log(hotelInfo);
-              // UGLE : TODO : TERJE  (ref. til main.js gjør stuff and stuff... and stuff.
               $rootScope.populateHotels(hotelInfo);
           });
       }
 
+      
+
       //Getting the connection object
       $.connection.hub.start()
       .done(function () {
+
+          $http.get('http://choicecenium.azurewebsites.net/api/WebJob');
+          //// TODO: Initialize kode.. kall på initialize signalR
+          //flight.client.addNewMessageToPage = function (hotelInfo) {
+          //    // console.log(booking);
+          //    $rootScope.$apply(function () {
+          //        console.log(hotelInfo);
+          //        $rootScope.populateHotels(hotelInfo);
+          //    });
+          //}
+
+
           console.log('Now connected, connection ID=' + $.connection.hub.id);
           $(".connection-spinner").css({ "display": "none" });
 

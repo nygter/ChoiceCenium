@@ -1,10 +1,10 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="view.aspx.cs" Inherits="ChoiceCenium.View" %>
 
-<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxGridView" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v14.2, Version=14.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 
-<%@ Register assembly="DevExpress.Web.v14.1, Version=14.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxEditors" tagprefix="dx" %>
 
-<%@ Register assembly="DevExpress.Web.v14.1, Version=14.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Data.Linq" tagprefix="dx" %>
+
+<%@ Register assembly="DevExpress.Web.v14.2, Version=14.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Data.Linq" tagprefix="dx" %>
 
 <!DOCTYPE html>
 
@@ -55,7 +55,7 @@
             <div class="maincontent">
                 
             
-            <dx:ASPxGridView ID="HotelList" runat="server" AutoGenerateColumns="False" DataSourceID="CeniumDataSource" Theme="Office2010Black" KeyFieldName="HotelId" Width="100%" S>
+            <dx:ASPxGridView ID="HotelList" runat="server" AutoGenerateColumns="False" DataSourceID="CeniumDataSource" Theme="Office2010Black" KeyFieldName="HotelId" Width="100%">
             <SettingsPager PageSize="30" />
                 <Columns>
                 <dx:GridViewCommandColumn ShowEditButton="true" VisibleIndex="0" ShowNewButtonInHeader="True" Caption="Opprett" />
@@ -70,7 +70,7 @@
                 </dx:GridViewDataComboBoxColumn>
                 <dx:GridViewDataTextColumn FieldName="Lon" VisibleIndex="6" Visible="False" />
                 <dx:GridViewDataTextColumn FieldName="Lat" VisibleIndex="7" Visible="False" />
-                <dx:GridViewDataTextColumn FieldName="CurrCeniumVersion" VisibleIndex="8" SortIndex="3" SortOrder="Ascending" Caption="Cenium Version" Visible="False"/>
+                <dx:GridViewDataTextColumn FieldName="CurrCeniumVersion" VisibleIndex="8" SortIndex="3" SortOrder="Ascending" Caption="Cenium Ver." Visible="False" Width="10px" />
                 <dx:GridViewDataDateColumn FieldName="UpgradeDate" VisibleIndex="9" SortIndex="4" SortOrder="Ascending" Caption="Upgrade Date">
                     <PropertiesDateEdit DisplayFormatString="dd.MM.yyyy">
                     </PropertiesDateEdit>

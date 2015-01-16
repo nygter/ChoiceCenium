@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using ChoiceCenium.Services;
@@ -9,15 +10,34 @@ namespace ChoiceCenium
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var username = HttpContext.Current.User.Identity.Name;
             bool isAuth = Request.IsAuthenticated;
-            HotelList.Columns[0].Visible = isAuth;
-            HotelList.Columns[5].Visible = isAuth;
-            HotelList.Columns[6].Visible = isAuth;
-            HotelList.Columns[7].Visible = isAuth;
-            HotelList.Columns[8].Visible = isAuth;
-            HotelList.Columns[10].Visible = isAuth; 
-            HotelList.Columns[11].Visible = isAuth;
-            HotelList.Columns[12].Visible = isAuth;
+
+            if (username == LoginService.CeniumUsername)
+            {
+                HotelList.Columns[0].Visible = true;
+                HotelList.Columns[5].Visible = true;
+                HotelList.Columns[6].Visible = true;
+                HotelList.Columns[7].Visible = true;
+                HotelList.Columns[8].Visible = true;
+                HotelList.Columns[10].Visible = true;
+                HotelList.Columns[11].Visible = true;
+                HotelList.Columns[12].Visible = true;
+            }
+            else if (username == LoginService.DefaultUser)
+            {
+                HotelList.Columns[0].Visible = true;
+                HotelList.Columns[5].Visible = true;
+                HotelList.Columns[6].Visible = true;
+                HotelList.Columns[7].Visible = true;
+                HotelList.Columns[8].Visible = true;
+                HotelList.Columns[9].Visible = false;
+                HotelList.Columns[10].Visible = false;
+                HotelList.Columns[11].Visible = false;
+                HotelList.Columns[12].Visible = true;
+            }
+
+            
             lnkLogout.Visible = isAuth;
             lnkLogin.Visible = !isAuth;
         }
