@@ -8,19 +8,25 @@ namespace ChoiceCenium.Models
 {
     public class KjedeInfo
     {
+        private static List<KjedeInfoes> _kjeder;
+
         public static List<KjedeInfoes> GetKjedeInfo()
         {
-            var db = new ChoiceCenium_dbEntities();
+            if (_kjeder == null)
+            {
+                var db = new ChoiceCenium_dbEntities();
 
-            try
-            {
-                return db.KjedeInfoes.ToList();
+                try
+                {
+                    _kjeder = db.KjedeInfoes.ToList();
+                }
+                catch (Exception e)
+                {
+                    //LogService.Register(e.Message, e.Source, e.ToString());
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                //LogService.Register(e.Message, e.Source, e.ToString());
-                throw;
-            }
+            return _kjeder;
         }
     }
 }

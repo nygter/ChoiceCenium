@@ -162,6 +162,7 @@
     <Content Include="Global.asax" />
     <Content Include="Images\button-back.png" />
     <Content Include="Images\button-save.png" />
+    <Content Include="Images\choice-logo.png" />
     <Content Include="Images\icon-delete.png" />
     <Content Include="Images\icon-edit.png" />
     <Content Include="Images\icon-plus.png" />

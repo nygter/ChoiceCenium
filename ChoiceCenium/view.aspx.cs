@@ -1,15 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using ChoiceCenium.Services;
+using DevExpress.Web;
 
 namespace ChoiceCenium
 {
     public partial class View : Page
     {
+
+        private IList<KjedeInfoes> _kjedelist;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            // ugle : page postback handling...
+            FillKjedeList();
+
             var username = HttpContext.Current.User.Identity.Name;
             bool isAuth = Request.IsAuthenticated;
 
@@ -37,9 +45,14 @@ namespace ChoiceCenium
                 HotelList.Columns[12].Visible = true;
             }
 
-            
+
             lnkLogout.Visible = isAuth;
             lnkLogin.Visible = !isAuth;
+        }
+
+        private void FillKjedeList()
+        {
+            _kjedelist = KjedeService.GetKjeder();
         }
 
         protected void ValidateUser_Click(object sender, EventArgs e)
@@ -59,6 +72,20 @@ namespace ChoiceCenium
         {
             FormsAuthentication.SignOut();
             Response.Redirect("view.aspx", false);
+        }
+
+
+        protected void HotelList_CommandButtonInitialize(object sender, ASPxGridViewCommandButtonEventArgs e)
+        {
+            if (e.ButtonType == ColumnCommandButtonType.New && e.VisibleIndex != -1)
+            {
+                e.Text = "";
+            }
+            
+            if (e.ButtonType == ColumnCommandButtonType.Edit || e.ButtonType == ColumnCommandButtonType.Delete)
+            {
+                e.Text = "";
+            }
         }
     }
 }

@@ -67,5 +67,10 @@ namespace ChoiceCenium.Services
 
             return hotelList;
         }
+
+        public static Hotelinfoes GetHotelInfo(ChoiceCenium_dbEntities db, int hotelId)
+        {
+            return db.Hotelinfoes.FirstOrDefault(hi => hi.HotelId == hotelId);
+        }
     }
 }

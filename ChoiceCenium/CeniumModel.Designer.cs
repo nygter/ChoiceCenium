@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\_-_ Choice\choice-cenium-backend\ChoiceCenium\ChoiceCenium\CeniumModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\terje.nygard\Source\Repos\ChoiceCenium\ChoiceCenium\CeniumModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

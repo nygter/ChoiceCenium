@@ -29,7 +29,7 @@ html {
 
 td {
     font-size: 115%;
-}
+    }
 
 /* line 24, C:/Ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
@@ -83,7 +83,7 @@ html, body {
 
 /* line 38, C:/Ugle/Instore/Tradesolution.InStore.BackOffice/Content/Sass/_base.scss */
 body {
-  background: #333333;
+  background: #000000;
   color: #eeeeee;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -98,24 +98,40 @@ a {
     padding: 10px;
     width: 100%;
     display: block;
-    height: 50px;
-    min-height: 50px;
-    background-color: #444444;
+    height: 100px;
+    min-height: 100px;
+    background-color: #000000;
     color: white;
     text-align: center;
     font-family: Century Gothic;
     font-size: 1.4em;
-    line-height: 30px;
 }
 
 .headerleft {
     float: left;
+    padding-left: 10px;
 }
 
 .headerright {
     float: right;
+    padding-right: 10px;
 }
 
 .maincontent {
-    padding: 15px;
+    padding: 0px 15px 15px 15px;
+}
+
+.tbl-def {
+    border-spacing: 10px;
+    border-collapse: separate;
+}
+
+.tbl-lbl {
+    
+}
+
+.tbl-txt {
+    width: 400px;
+    font-size: 0.7em;
+    height: 30px;
 }

@@ -81,12 +81,13 @@ namespace ChoiceCenium.Models
 
             try
             {
-                db.Hotelinfoes.Remove(h);
+                Hotelinfoes hi = HotelService.GetHotelInfo(db, h.HotelId);
+                db.Hotelinfoes.Remove(hi);
                 db.SaveChanges();
             }
             catch (Exception e)
             {
-                //LogService.Register(e.Message, e.Source, e.ToString());
+                var ugle = e.Message;
             }
             
             var hub = new HotelInfoHub();
